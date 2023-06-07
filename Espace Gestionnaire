@@ -1,0 +1,93 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class espaceGesController implements Initializable {
+
+		
+	    @FXML
+	    private Button gererMembre;
+		
+		@FXML
+		private Button GererScores;
+		
+		@FXML
+		private Button Organiser;
+		
+
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			gererMembre.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("GererMem.fxml"));
+						Scene scene = new Scene(root);
+		
+						Stage stage = new Stage();
+						stage.setTitle("ESPACE MEMBRE");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+            GererScores.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("Scores.fxml"));
+						Scene scene = new Scene(root);
+						
+						Stage stage = new Stage();
+						stage.setTitle("Gerer Scores");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+          Organiser.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("Rencontres.fxml"));
+						Scene scene = new Scene(root);
+						
+						Stage stage = new Stage();
+						stage.setTitle("ORGANISER MATCHS");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+
+         }
+		
+	}
