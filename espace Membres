@@ -1,0 +1,146 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import com.util.dao.IMembreDao;
+import com.util.dao.IScoresDao;
+import com.util.dao.MembreDao;
+import com.util.dao.ScoresDao;
+import com.upb.model.Membre;
+import com.upb.model.Scores;
+
+public class espaceMemController implements Initializable{
+	 @FXML
+	    private List<Membre> addMembreList;
+	 
+	 @FXML
+	    private Button rechercheButton;
+
+	    @FXML
+	    private TextField recherhField;
+	 
+	 @FXML
+	 private List<Membre> addMembreListFiltered;
+	 
+	 @FXML
+	    private List<Scores> addScoresList;
+
+    @FXML
+    private Hyperlink allScores;
+
+    @FXML
+    private TableColumn<?, ?> id_joueur1;
+
+    @FXML
+    private TableColumn<?, ?> id_joueur2;
+
+    @FXML
+    private TableColumn<?, ?> id_mem;
+
+    @FXML
+    private TableColumn<?, ?> nom1;
+
+    @FXML
+    private TableColumn<?, ?> nom2;
+
+    @FXML
+    private TableColumn<?, ?> nom_mem;
+
+    @FXML
+    private TableColumn<?, ?> score1;
+
+    @FXML
+    private TableColumn<?, ?> score2;
+
+    @FXML
+    private TableView<Membre> tab_mem;
+
+    @FXML
+    private TableView<Scores> tableau_score;
+    
+    IMembreDao imembreDao = new MembreDao();
+    IScoresDao iscoresDao = new ScoresDao();
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		// TODO Auto-generated method stub
+	    allScores.setOnAction(new EventHandler<ActionEvent>() {
+			
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("Scores.fxml"));
+						Scene scene = new Scene(root);
+		
+						Stage stage = new Stage();
+						stage.setTitle(" ");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block		
+						e.printStackTrace();
+					}
+				}
+			});
+		ListMembre();
+		ListScores();
+	}
+	@FXML
+	void ListMembre(ActionEvent e) {
+		ListMembre();	
+	}
+	
+	public void ListMembre() {
+		addMembreList = imembreDao.getAllMembres();
+		Membre membre = new Membre();
+		
+		id_mem.setCellValueFactory(new PropertyValueFactory<>("idMembre"));
+		nom_mem.setCellValueFactory(new PropertyValueFactory<>("nomMembre"));
+		
+		tab_mem.getItems().addAll(addMembreList);
+	}
+	public void ListScores() {
+		addScoresList = iscoresDao.getAllScores();
+		
+		
+		nom1.setCellValueFactory(new PropertyValueFactory<>("nomGagnant"));
+		nom2.setCellValueFactory(new PropertyValueFactory<>("nomPerdant"));
+		score1.setCellValueFactory(new PropertyValueFactory<>("nombreSetGagnant"));
+		score2.setCellValueFactory(new PropertyValueFactory<>("nombreSetPerdant"));
+		
+		tableau_score.getItems().addAll(addScoresList);
+	}
+	
+	public void researchMem() {
+		addMembreListFiltered = imembreDao.getAllMembres();
+		for(Membre x : addMembreListFiltered) {
+			if(x.getNomMembre().equals(recherhField.getText())) {
+				id_mem.setCellValueFactory(new PropertyValueFactory<>(x.getIdMembre().toString()));
+				nom_mem.setCellValueFactory(new PropertyValueFactory<>(x.getNomMembre().toString()));
+				tab_mem.getItems().addAll(x);
+			}
+		}
+	}
+}
