@@ -1,0 +1,401 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import com.util.dao.MembreDao;
+import com.upb.model.Membre;
+import com.util.dao.IMatchDao;
+import com.util.dao.IMembreDao;
+import com.util.dao.MatchDao;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+public class GererMemController implements Initializable {
+	
+    @FXML
+    private Hyperlink accueil;
+	
+	@FXML
+	private Hyperlink Scores;
+	
+	@FXML
+	private Button ajouter;
+	
+	@FXML
+	private Button modifie;
+	
+	@FXML
+	private Hyperlink videos;
+	
+	   @FXML
+	    private TableColumn<?, ?> id;
+	   
+	    @FXML
+	    private TableColumn<?, ?> nom;
+
+	    @FXML
+	    private TableColumn<?, ?> prenom;
+
+	    @FXML
+	    private TableColumn<?, ?> profession;
+	    
+	    @FXML
+	    private TableColumn<?, ?> adresse;
+	    
+	    @FXML
+	    private TableColumn<?, ?> EmailCase;
+
+	    @FXML
+	    private Button supprimer;
+
+	    @FXML
+	    private TableView<Membre> tableau_mem;
+
+	    @FXML
+	    private TableColumn<?, ?> telephone;
+	    
+	    IMembreDao imembreDao = new MembreDao();
+	    IMatchDao imatchDao = new MatchDao();
+	    
+	    private List<Membre> addMembreList;
+	    
+	    @FXML
+	    private Button valider;
+	    
+	    
+	   
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		accueil.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("quelquechoseUique.fxml"));
+					Scene scene = new Scene(root);
+	
+					Stage stage = new Stage();
+					stage.setTitle(" ");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block		
+					e.printStackTrace();
+				}
+			}
+		});
+        Scores.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("Scores.fxml"));
+					Scene scene = new Scene(root);
+					
+					Stage stage = new Stage();
+					stage.setTitle("");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+     ajouter.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("formulaire.fxml"));
+					Scene scene = new Scene(root);
+					
+					Stage stage = new Stage();
+					stage.setTitle("FORMULAIRE AJOUT");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+     supprimer.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("suppMem.fxml"));
+					Scene scene = new Scene(root);
+					
+					Stage stage = new Stage();
+					stage.setTitle("FORMULAIRE DE SUPPRESSION");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+     modifie.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("modifier.fxml"));
+					Scene scene = new Scene(root);
+					
+					Stage stage = new Stage();
+					stage.setTitle("FORMULAIRE AJOUT");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+     videos.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("videos.fxml"));
+					Scene scene = new Scene(root);
+					
+					Stage stage = new Stage();
+					stage.setTitle(" ");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+			}
+		});
+     membreShowList();
+     
+	}
+	@FXML
+	void membreShowList(ActionEvent e) {
+		
+	}
+	@FXML
+	void modifier(ActionEvent e) {
+		modifier();	
+	}
+
+     public void membreShowList() {
+    	 addMembreList = imembreDao.getAllMembres();
+    	 
+    	 id.setCellValueFactory(new PropertyValueFactory<>("idMembre"));
+    	 nom.setCellValueFactory(new PropertyValueFactory<>("nomMembre"));
+    	 prenom.setCellValueFactory(new PropertyValueFactory<>("prenomMembre"));
+    	 adresse.setCellValueFactory(new PropertyValueFactory<>("adresseMembre"));
+    	 telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+    	 profession.setCellValueFactory(new PropertyValueFactory<>("profession"));
+    	 EmailCase.setCellValueFactory(new PropertyValueFactory<>("Email"));
+    	 tableau_mem.getItems().addAll(addMembreList);
+     }
+     public void modifier() {
+    	 IMembreDao imembreDao = new MembreDao();
+    	 Alert alert;
+    	 if(nom.getText().isEmpty() || prenom.getText().isEmpty() || adresse.getText().isEmpty() || telephone.getText().isEmpty() || profession.getText().isEmpty() || tableau_mem.getSelectionModel().getSelectedItem()== null) {
+    		 alert = new Alert(AlertType.ERROR);
+    		 alert.setTitle("Error Message");
+    		 alert.setHeaderText(null);
+    		 alert.setContentText("Remplissez les champs svp");
+    		 alert.showAndWait();
+    	 }else {
+    		 alert = new Alert(AlertType.CONFIRMATION);
+    		 alert.setTitle("CONFIRMATION MESSAGE");
+    		 alert.setHeaderText(null);
+    		 alert.setContentText("voulez vous vraiment changer les informations de:"+nom.getText()+" ?");
+    		 Optional<ButtonType> option = alert.showAndWait();
+    		 if(option.get().equals(ButtonType.OK)) {
+    			 for(Membre e : imembreDao.getAllMembres()) {
+    				 if(e.getNomMembre().equals(nom.getText())) {
+    					 e.setNomMembre(nom.getText());
+    					 e.setPrenomMembre(prenom.getText());
+    					 e.setAdresseMembre(adresse.getText());
+    					 e.setTelephone(telephone.getText());
+    					 e.setProfession(profession.getText());
+    					 
+    					 imembreDao.updateMembre(e);
+    				 }
+    			 }
+    		 }
+    		 alert = new Alert(AlertType.INFORMATION);
+    		 alert.setTitle("Modifié avec succès");
+    		 alert.setHeaderText(null);
+    		 alert.setHeaderText("Utilisateur :"+ nom.getText() +" enregistrer avec success");
+    		 alert.showAndWait();
+    		 membreShowList();
+    		 
+    	 }
+     }
+     public void supprimer() {
+ 		int selectedID = tableau_mem.getSelectionModel().getSelectedIndex();
+      	Alert alert;
+      		/*if(selectedID) {
+      		 alert = new Alert(AlertType.ERROR);
+      		 alert.setTitle("Error Message");
+      		 alert.setHeaderText(null);	
+      		 alert.setContentText("entrez la date de la rencontre a supprimer svp");
+      		 alert.showAndWait();
+      	 }else {*/
+      	if(selectedID<=-1){
+ 			 alert = new Alert(AlertType.ERROR);
+ 	   		 alert.setTitle("Error Message");
+ 	   		 alert.setHeaderText(null);
+ 	   		 alert.setContentText("AUCUNE LIGNE SELECTIONNE");
+ 	   		 alert.showAndWait();
+      	 }
+
+      			 for(Membre m : imembreDao.getAllMembres()) {
+      				 if(m.getIdMembre() == selectedID) {
+      					/* m.setDateMatch(Date.getText());
+      					 m.setHeureDebut(HeureD.getText());
+      					 m.setHeureFin(HeureF.getText());
+      					 m.setDuree(Duree.getText());
+      					 m.setParticipant(participant.getText());
+      					 m.setArbitre(Arbitre.getText());
+      					 m.setTerrain(Terrain.getText());*/
+      					 
+      					imembreDao.deleteMembre(selectedID);
+      	     			alert = new Alert(AlertType.INFORMATION);
+      	         		 alert.setTitle("SUPRIMER AVEC SUCCES");
+      	         		 alert.setHeaderText(null);
+      	         		 alert.setHeaderText(" Vous avez  supprimer avec succès");
+      	         		 alert.showAndWait();
+      				 }
+      			 }	 
+      		 }
+     public void EnvoyerEmail(ActionEvent event) {
+    	 Session session;
+ 		Membre membre;
+ 		Alert alert;
+ 		int selectedID = tableau_mem.getSelectionModel().getSelectedIndex();
+
+ 		//if (event.getSource().equals(btnForget)) {
+
+ 			/*if (txtUsernameCo.getText().isEmpty()) {
+ 				alert = new Alert(AlertType.WARNING);
+ 				alert.setTitle("Attention !!");
+ 				alert.setHeaderText(null);
+ 				alert.setContentText(
+ 						"Entrez votre nom d'utilisateur ou e-mail\nAvant de cliquer sur 'Mot de passe oublié' !");
+ 				alert.showAndWait();
+ 			} else {*/
+ 				String to = "";
+ 				for (Membre p : imembreDao.getAllMembres()) {
+ 					if (p.getIdMembre() == selectedID) {
+ 						to = imembreDao.getMembreById(selectedID).getEmail(); // adresse e-mail de
+ 																						// l'administrateur
+ 					}
+ 				}
+ 				String from = "tchetchelevis6@gmail.com"; // adresse e-mail de l'expéditeur
+ 				String password = "vflmjjymejgeauie"; // mot de passe Gmail de l'expéditeur
+
+ 				try {
+ 					// Paramètres SMTP pour Gmail
+ 					Properties props = new Properties();
+ 					props.put("mail.smtp.host", "smtp.gmail.com");
+ 					props.put("mail.smtp.port", "587");
+ 					props.put("mail.smtp.auth", "true");
+ 					props.put("mail.smtp.starttls.required", "true");
+ 					props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+ 					// Créer une session d'e-mail avec l'authentification
+ 					Authenticator auth = new Authenticator() {
+ 						@Override
+ 						protected PasswordAuthentication getPasswordAuthentication() {
+ 							return new PasswordAuthentication(from, password);
+ 						}
+ 					};
+ 					boolean goodd = false;
+ 					for (Membre p : imembreDao.getAllMembres()) {
+ 						if (p.getIdMembre() == selectedID) {
+ 							goodd = true;
+ 						}
+ 					}
+ 					if (goodd) {
+ 						session = Session.getInstance(props, auth);
+
+ 						// Créer un message e-mail
+ 						Message message = new MimeMessage(session);
+ 						message.setFrom(new InternetAddress(from));
+ 						message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+ 						message.setSubject("Récuperation de mot de passe");
+ 						for (Membre p : imembreDao.getAllMembres()) {
+ 							String htmlcode = "<h1>Bonjour M/Mlle "
+ 									+ imembreDao.getMembreById(p.getIdMembre()).getNomMembre()
+ 									+ "</h1>,\n\n <h2>Heureux de vous revoir !\n\n Vous avez une rencontre <b>"
+ 									+ "</b> RDV sur APP G7 pour plus d'informations</h2>";
+ 							message.setContent(htmlcode, "text/html");
+ 						}
+ 						// Envoyer le message e-mail
+ 						Transport.send(message);
+
+ 						alert = new Alert(AlertType.INFORMATION);
+ 						alert.setTitle("Mot de passe oublié");
+ 						alert.setHeaderText(null);
+ 						for (Membre p : imembreDao.getAllMembres()) {
+ 							alert.setContentText("Un message a été envoyer a l'emai: "
+ 									+ imembreDao.getMembreById(p.getIdMembre()).getEmail() + ", appelez  le et demandez lui de consulter sa boite mail");
+ 							alert.showAndWait();
+ 						}
+ 					}
+ 					if(selectedID <=-1){
+						alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Attention !!");
+						alert.setHeaderText(null);
+						alert.setContentText("Aucun utlisateur n'a été selectionné!");
+						//alert.showAndWait();
+					}
+				} catch (MessagingException e) {
+					alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Attention !!");
+					alert.setHeaderText(null);
+					alert.setContentText("Assurez-vous d'être connnecté à internet !");
+					alert.showAndWait();
+				}
+          }
+	}
