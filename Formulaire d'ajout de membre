@@ -1,0 +1,88 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.security.PublicKey;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import com.upb.model.Membre;
+import com.util.dao.IMembreDao;
+import com.util.dao.MembreDao;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+public class FormController implements Initializable{
+	
+     @FXML
+     private Button adds;
+     @FXML
+     private Button modifie;
+     
+     @FXML
+     private TextField nom;
+     
+     @FXML
+     private TextField prenom;
+     
+     @FXML
+     private TextField telephone;
+     
+     @FXML
+     private TextField profession;
+     
+     @FXML
+     private TextField adresse;
+     @FXML
+     private Button annuler;
+     @FXML
+     private TextField Email;
+     
+     
+     public void initialize(URL arg0, ResourceBundle arg1) {
+    	 
+     }
+ 		 
+     public void ajouter() {
+    	 
+    	 if(nom.getText().isEmpty() || prenom.getText().isEmpty() || telephone.getText().isEmpty() ||adresse.getText().isEmpty() || profession.getText().isEmpty() || Email.getText().isEmpty()) {
+ 			Alert alert;
+ 		 alert = new Alert(AlertType.ERROR);
+    		 alert.setTitle("Error Message");
+    		 alert.setHeaderText(null);
+    		 alert.setContentText("Remplissez les champs svp");
+    		 alert.showAndWait();
+ 		}else {
+    	
+    	 	 Alert alert;
+    	 		Membre membre = new Membre();
+    	 		IMembreDao imembreDao = new MembreDao();
+    	 		membre.setNomMembre(nom.getText());
+    	 		membre.setPrenomMembre(prenom.getText());
+    	 		membre.setTelephone(telephone.getText());
+    	 		membre.setAdresseMembre(adresse.getText());
+    	 		membre.setProfession(profession.getText());
+    	 		membre.setProfession(Email.getText());
+    	 		imembreDao.saveMembre(membre);
+    	 		 alert = new Alert(AlertType.INFORMATION);
+        		 alert.setTitle("Error Message");
+        		 alert.setHeaderText(null);
+        		 alert.setContentText("MEMBRE ajouter avec  succès");
+        		 alert.showAndWait();
+    	 }
+   
+	    }
+ 	}
