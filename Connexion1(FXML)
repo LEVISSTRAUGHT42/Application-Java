@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Connexion1Controller">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Pane prefHeight="516.0" prefWidth="324.0" style="-fx-background-color: #404258;">
+               <children>
+                  <ImageView fitHeight="279.0" fitWidth="306.0" layoutX="12.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="D:\Fonds Ecrans\images\Grand slam-bro.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="36.0" layoutY="121.0" text="CLUB DE TENNIS" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="516.0" prefWidth="353.0" style="-fx-background-color: #474E68;">
+               <children>
+                  <Label layoutX="32.0" layoutY="14.0" prefHeight="46.0" prefWidth="289.0" text="connexion membre" textFill="WHITE">
+                     <font>
+                        <Font name="Eras Bold ITC" size="29.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" layoutY="85.0" prefHeight="431.0" prefWidth="347.0">
+                     <children>
+                        <Label text="Nom" textFill="WHITE">
+                           <font>
+                              <Font name="Forte" size="21.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nom" promptText="Veuillez entrer votre nom" style="-fx-background-color: #CDE990; -fx-background-radius: 10;">
+                           <padding>
+                              <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="5.0" right="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TextField>
+                        <Label text="Telephone" textFill="WHITE">
+                           <font>
+                              <Font name="Forte" size="21.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="tel" promptText="votre numero telephone" style="-fx-background-color: #CDE990; -fx-background-radius: 10;">
+                           <padding>
+                              <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="5.0" right="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </PasswordField>
+                        <Button fx:id="Con" mnemonicParsing="false" onAction="#LoginMem" prefHeight="58.0" prefWidth="147.0" style="-fx-background-radius: 20; -fx-background-color: #fff;" text="connecter">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font name="Lucida Fax Demibold" size="21.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Hyperlink fx:id="goGest" text="Se connecter en tant que GESTIONNAIRE ?" textFill="#ef4a4a" underline="true">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</StackPane>
