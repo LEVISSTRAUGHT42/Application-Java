@@ -1,0 +1,116 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import com.upb.model.Gestionnaire;
+import com.upb.model.Membre;
+import com.util.dao.GestionnaireDao;
+import com.util.dao.IGestionnaireDao;
+import com.util.dao.IMembreDao;
+import com.util.dao.MembreDao;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+
+public class GestController  implements Initializable{
+    @FXML
+    private Button Con;
+
+    @FXML
+    private Hyperlink goMem;
+
+    @FXML
+    private TextField nom;
+
+    @FXML
+    private PasswordField password;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		 goMem.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("Connexion1.fxml"));
+						Scene scene = new Scene(root);
+						
+						Stage stage = new Stage();
+						stage.setTitle(" Espace Membre");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+	}
+	public void LoginGest() {
+		IGestionnaireDao igestionnaireDao = new GestionnaireDao();
+    	 Alert alert;
+    	 if(nom.getText().isEmpty() || password.getText().isEmpty() ) {
+    		 alert = new Alert(AlertType.ERROR);
+    		 alert.setTitle("Error Message");
+    		 alert.setHeaderText(null);
+    		 alert.setContentText("Remplissez les champs svp");
+    		 alert.showAndWait();
+    	 }
+    	 else {
+    		 Boolean verif = false;
+    		 for(Gestionnaire e: igestionnaireDao.getAllGestionnaires()) {
+    	         
+    			 if(e.getNomGestionnaire().equals(nom.getText()) && e.getMotDePasse().equals(password.getText())) {
+    				 verif = true;
+    				 alert = new Alert(AlertType.INFORMATION);
+    	    		 alert.setTitle("CONFIRMATION MESSAGE");
+    	    		 alert.setHeaderText(null);
+    	    		 alert.setContentText("Validez vous la connexion Mr "+nom.getText()+" et Appuyez sur CONNECTER a nouvau");    		
+    				 Con.setOnAction(new EventHandler<ActionEvent>() {		
+    						@Override
+    						public void handle(ActionEvent arg0) {
+    							// TODO Auto-generated method stub
+    							try {
+    								Parent root = FXMLLoader.load(getClass().getResource("OptionsGest.fxml"));
+    								Scene scene = new Scene(root);
+    								
+    								Stage stage = new Stage();
+    								stage.setTitle(" Espace Gestionnaire");
+    								stage.setScene(scene);
+    								stage.show();
+    							} catch (IOException e) {
+    								// TODO Auto-generated catch block
+    								e.printStackTrace();
+    							}
+    						}
+    					});
+    				 alert = new Alert(AlertType.INFORMATION);
+		    		 alert.setTitle("Error Message");
+		    		 alert.setHeaderText(null);
+		    		 alert.setContentText("BIENVENUE, MR " +nom.getText()+" APPUYEZ A NOUVEAU sur CONNECTER ! ");
+		    		 alert.showAndWait();
+    			 }
+    
+    		 }
+ 
+    	 }
+	}
+}
