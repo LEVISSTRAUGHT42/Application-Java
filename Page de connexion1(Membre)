@@ -1,0 +1,105 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.upb.model.Membre;
+import com.util.dao.IMembreDao;
+import com.util.dao.MembreDao;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+
+public class Connexion1Controller implements Initializable{
+	  @FXML
+	    private Button Con;
+
+	    @FXML
+	    private Hyperlink goGest;
+
+	    @FXML
+	    private TextField nom;
+
+	    @FXML
+	    private PasswordField tel;
+
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			goGest.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					try {
+						Parent root = FXMLLoader.load(getClass().getResource("Gest.fxml"));
+						Scene scene = new Scene(root);
+						
+						Stage stage = new Stage();
+						stage.setTitle(" Espace Gest");
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			
+		}
+		public void LoginMem() {
+			IMembreDao imembreDao = new MembreDao();
+	    	 Alert alert;
+	    	 if(nom.getText().isEmpty() || tel.getText().isEmpty() ) {
+	    		 alert = new Alert(AlertType.ERROR);
+	    		 alert.setTitle("Error Message");
+	    		 alert.setHeaderText(null);
+	    		 alert.setContentText("Remplissez les champs svp");
+	    		 alert.showAndWait();
+	    	 }else {
+	    		 Boolean verif = false;
+	    		 for(Membre e: imembreDao.getAllMembres()) {
+
+	    			 if(e.getNomMembre().equals(nom.getText()) && e.getTelephone().equals(tel.getText())) {
+	    				 verif = true;
+	    				 Con.setOnAction(new EventHandler<ActionEvent>() {
+	    						
+	    						@Override
+	    						public void handle(ActionEvent arg0) {
+	    							// TODO Auto-generated method stub
+	    							try {
+	    								Parent root = FXMLLoader.load(getClass().getResource("espaceMem.fxml"));
+	    								Scene scene = new Scene(root);
+	    								
+	    								Stage stage = new Stage();
+	    								stage.setTitle(" Espace Membre");
+	    								stage.setScene(scene);
+	    								stage.show();
+	    							} catch (IOException e) {
+	    								// TODO Auto-generated catch block
+	    								e.printStackTrace();
+	    							}
+	    						}
+	    					});
+	    					 alert = new Alert(AlertType.INFORMATION);
+	    		    		 alert.setTitle("Error Message");
+	    		    		 alert.setHeaderText(null);
+	    		    		 alert.setContentText("BIENVENUE, MR " +nom.getText()+" APPUYEZ A NOUVEAU sur CONNECTER ! ");
+	    		    		 alert.showAndWait();
+	    	        }
+	    		 }
+	    	 }
+		}
+}
