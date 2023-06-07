@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane fx:controller="application.espaceGesController" dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="201.0" style="-fx-background-color: RED;">
+         <children>
+            <Label layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="166.0" text="Bienvenue monsieur" textFill="#fff7f7">
+               <font>
+                  <Font name="Bernard MT Condensed" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="595.0" prefHeight="31.0" prefWidth="174.0" text="Que voulez vous faire ?">
+               <font>
+                  <Font name="Britannic Bold" size="13.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.5352422991513156" centerY="0.8901515675313545" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9368420839309692" green="0.06939571350812912" blue="0.06939571350812912" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Pane layoutX="-16.0" layoutY="252.0" prefHeight="200.0" prefWidth="142.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="644.0" prefWidth="436.0">
+         <children>
+            <Label layoutX="152.0" layoutY="48.0" prefHeight="18.0" prefWidth="174.0" text="APPG7">
+               <font>
+                  <Font name="Bodoni MT Black" size="36.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.31938328511914493" centerY="0.5378787878787878" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9368420839309692" green="0.06939571350812912" blue="0.06939571350812912" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Label layoutY="226.0" prefHeight="18.0" prefWidth="152.0" text="GERER LES MEMBRES :" underline="true">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="gererMembre" layoutX="202.0" layoutY="219.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="MEMBRES">
+               <font>
+                  <Font name="Bodoni MT Black" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="5.0" layoutY="311.0" prefHeight="18.0" prefWidth="159.0" text="LES SCORES" underline="true">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="GererScores" layoutX="202.0" layoutY="305.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="SCORES">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="-2.0" layoutY="509.0" prefHeight="18.0" prefWidth="174.0" text="ANNULER UNE RENCONTRE" underline="true">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="AnnulerRen" layoutX="202.0" layoutY="503.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="ANNULER">
+               <font>
+                  <Font name="Bodoni MT Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="Retour" layoutX="205.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: red;" text="RETOUR">
+               <font>
+                  <Font name="Agency FB" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="8.0" layoutY="606.0" prefHeight="18.0" prefWidth="184.0" text="retourner vers la page d'accueil">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="Organiser" layoutX="202.0" layoutY="370.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="99.0" text="ORGANISER">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="1.0" layoutY="376.0" prefHeight="18.0" prefWidth="184.0" text="Organiser Rencontres" underline="true">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="443.0" prefHeight="18.0" prefWidth="184.0" text="VIDEOS" underline="true">
+               <font>
+                  <Font name="Algerian" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="Videos" layoutX="202.0" layoutY="437.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="VOIR">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+  </items>
+   <effect>
+      <Blend />
+   </effect>
+</SplitPane>
