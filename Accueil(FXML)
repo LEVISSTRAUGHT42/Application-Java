@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="-1.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="934.0" AnchorPane.leftAnchor="-1.0">
+               <children>
+                  <TextField fx:id="TexRecherche" cache="true" layoutX="671.0" layoutY="27.0" prefHeight="26.0" prefWidth="212.0" promptText="Rechercher une Rencontre ">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font></TextField>
+                  <Label layoutX="595.0" layoutY="33.0" prefHeight="14.0" prefWidth="74.0" text="RECHERCHER" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Algerian" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="RechercheButton" layoutX="886.0" layoutY="27.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="26.0" prefWidth="33.0" text="Go">
+                     <font>
+                        <Font name="Arial Black" size="11.0" />
+                     </font>
+                  </Button>
+                  <ButtonBar layoutY="439.0" prefHeight="40.0" prefWidth="200.0" />
+                  <Label layoutX="14.0" layoutY="283.0" prefHeight="18.0" prefWidth="147.0" text="  Queques Rencontres " textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="740.0" layoutY="270.0" promptText="rechercher une rencontre a partir de la date" showWeekNumbers="true" />
+                  <Button fx:id="co" defaultButton="true" layoutX="448.0" layoutY="789.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="102.0" style="-fx-background-color: #026349;" text="SE CONNECTER" textFill="WHITE" textOverrun="CLIP">
+                     <font>
+                        <Font name="Perpetua" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="25.0" layoutY="514.0" prefHeight="26.0" prefWidth="522.0" text="A VOIR..." textFill="#ffd6d6" underline="true">
+                     <font>
+                        <Font name="Bookman Old Style" size="14.0" />
+                     </font>
+                  </Label>
+                  <TitledPane animated="false" contentDisplay="CENTER" layoutX="20.0" layoutY="557.0" prefHeight="206.0" prefWidth="343.0" text="V">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: red;" />
+                     </content>
+                     <font>
+                        <Font name="Lucida Bright Demibold" size="13.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="573.0" layoutY="557.0" prefHeight="206.0" prefWidth="346.0" text="S">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: blue;" />
+                     </content>
+                     <font>
+                        <Font name="Lucida Bright Demibold" size="13.0" />
+                     </font>
+                  </TitledPane>
+                  <Label alignment="CENTER" layoutX="314.0" layoutY="105.0" prefHeight="91.0" prefWidth="316.0" text="APPG7" underline="true">
+                     <font>
+                        <Font name="Bodoni MT Black" size="54.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.31938328511914493" centerY="0.5378787878787878" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9368420839309692" green="0.06939571350812912" blue="0.06939571350812912" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <TableView fx:id="tableau_match" layoutX="20.0" layoutY="304.0" prefHeight="228.0" prefWidth="898.0">
+                     <columns>
+                        <TableColumn fx:id="id_match" prefWidth="52.800018310546875" text="ID" />
+                        <TableColumn fx:id="date" prefWidth="108.8000259399414" text="DATE" />
+                        <TableColumn fx:id="heureD" prefWidth="119.19998168945312" text="Heure Debut" />
+                        <TableColumn fx:id="heureF" prefWidth="119.20001220703125" text="Heure Fin" />
+                        <TableColumn fx:id="duree" prefWidth="127.19998168945312" text="Duree" />
+                        <TableColumn fx:id="Participants" prefWidth="181.60009765625" text="Participant" />
+                        <TableColumn fx:id="arbitre" minWidth="0.0" text="Arbitre" />
+                        <TableColumn fx:id="terrain" minWidth="0.0" prefWidth="96.0" text="Terrain" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="640.0" layoutY="270.0" mnemonicParsing="false" text="RECHERCHER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
