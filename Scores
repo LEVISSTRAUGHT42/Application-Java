@@ -1,0 +1,269 @@
+package application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.upb.model.Matchs;
+import com.upb.model.Scores;
+import com.util.dao.IMatchDao;
+import com.util.dao.IScoresDao;
+import com.util.dao.MatchDao;
+import com.util.dao.ScoresDao;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+public class ScoresController  implements Initializable{
+
+	@FXML
+    private TextField GagnantField;
+
+    @FXML
+    private TableColumn<?, ?> ID;
+
+    @FXML
+    private TableColumn<?, ?> Nbre_Set_Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Nbre_Set_Perdant;
+
+    @FXML
+    private TableColumn<?, ?> Nom_Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Nom_Perdant;
+
+    @FXML
+    private TextField PerdantField;
+
+    @FXML
+    private TableColumn<?, ?> Set1Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Set1Perdant;
+
+    @FXML
+    private TableColumn<?, ?> Set2Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Set2Perdant;
+
+    @FXML
+    private TableColumn<?, ?> Set3Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Set3Perdant;
+
+    @FXML
+    private TableColumn<?, ?> Set4Gagnant;
+
+    @FXML
+    private TableColumn<?, ?> Set4Perdant;
+
+    @FXML
+    private Hyperlink accueil;
+
+    @FXML
+    private Hyperlink mem;
+
+    @FXML
+    private Hyperlink mem1;
+
+    @FXML
+    private TextField set1GagnantField;
+
+    @FXML
+    private TextField set1PerdantField;
+
+    @FXML
+    private TextField set2GagnantField;
+
+    @FXML
+    private TextField set2PerdantField;
+
+    @FXML
+    private TextField set3GagnantField;
+
+    @FXML
+    private TextField set3PerdantField;
+
+    @FXML
+    private TextField set4GagnantField;
+
+    @FXML
+    private TextField set4PerdantField;
+
+    @FXML
+    private TextField setGagnantField;
+
+    @FXML
+    private TextField setPerdantField;
+
+    @FXML
+    private TableView<Scores> tableau_score;
+
+    @FXML
+    private Hyperlink videos;
+    
+    IScoresDao iscoresDao = new ScoresDao();
+    List<Scores> addScores;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+mem.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("GererMem.fxml"));
+					Scene scene = new Scene(root);
+	
+					Stage stage = new Stage();
+					stage.setTitle(" ");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block		
+					e.printStackTrace();
+				}
+			}
+		});
+      accueil.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("quelquechoseUique.fxml"));
+					Scene scene = new Scene(root);
+	
+					Stage stage = new Stage();
+					stage.setTitle(" ");
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block		
+					e.printStackTrace();
+				}
+			}
+		});
+		// TODO Auto-generated method stub
+      ScoresShowList();
+      
+	}
+	public void ScoresShowList() {
+		
+	    	 addScores = iscoresDao.getAllScores();
+	    	 ID.setCellValueFactory(new PropertyValueFactory<>("idScore"));
+	    	 Nbre_Set_Gagnant.setCellValueFactory(new PropertyValueFactory<>("nombreSetGagnant"));
+	    	 Nbre_Set_Perdant.setCellValueFactory(new PropertyValueFactory<>("nombreSetPerdant"));
+	    	 Nom_Gagnant.setCellValueFactory(new PropertyValueFactory<>("nomGagnant"));
+	    	 Nom_Perdant.setCellValueFactory(new PropertyValueFactory<>("nomPerdant"));
+	    	 Set1Gagnant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet1Gagnant"));
+	    	 Set1Perdant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet1Perdant"));
+	    	 Set2Gagnant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet2Gagnant"));
+	    	 Set2Perdant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet2Perdant"));
+	    	 Set3Gagnant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet3Gagnant"));
+	    	 Set3Perdant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet3Perdant"));
+	    	 Set4Gagnant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet4Gagnant"));
+	    	 Set4Perdant.setCellValueFactory(new PropertyValueFactory<>("nombreJeuSet4Perdant"));
+	    	 
+	    	 tableau_score.getItems().addAll(addScores);
+	     
+	}
+public void AjouterScore() {
+		
+		if(GagnantField.getText().isEmpty() || PerdantField.getText().isEmpty() || set1GagnantField.getText().isEmpty() || set1PerdantField.getText().isEmpty() || 
+				set2GagnantField.getText().isEmpty() || set2PerdantField.getText().isEmpty() || set3GagnantField.getText().isEmpty() || set3PerdantField.getText().isEmpty() || set4PerdantField.getText().isEmpty() || set4GagnantField.getText().isEmpty()) {
+		 Alert alert;
+		 alert = new Alert(AlertType.ERROR);
+   		 alert.setTitle("Error Message");
+   		 alert.setHeaderText(null);
+   		 alert.setContentText("Remplissez les champs svp");
+   		 alert.showAndWait();
+		}
+		
+		IMatchDao imatchDao = new MatchDao();
+		
+		Scores scores = new Scores();
+        
+ 
+ 		
+ 		if(scores.getNomGagnant().equals(GagnantField.getText()) && scores.getNomPerdant().equals(PerdantField.getText()) ) {
+ 			Alert alert;
+ 			 alert = new Alert(AlertType.ERROR);
+ 	   		 alert.setTitle("Error Message");
+ 	   		 alert.setHeaderText(null);
+ 	   		 alert.setContentText("LES CHAMPS SONT IDENTIQUES, IMPOSSIBLE D'AJOUTER");
+ 	   		 alert.showAndWait();
+ 		} else {
+ 			scores.setNomGagnant(GagnantField.getText());
+ 			scores.setNomPerdant(PerdantField.getText());
+ 			scores.setNombreSetGagnant(setGagnantField.getAnchor());
+ 			scores.setNombreSetPerdant(setPerdantField.getAnchor());
+ 			scores.setNombreJeuSet1Gagnant(set1GagnantField.getAnchor());
+ 			scores.setNombreJeuSet1Perdant(set1PerdantField.getAnchor());
+ 			scores.setNombreJeuSet2Gagnant(set2GagnantField.getAnchor());
+ 			scores.setNombreJeuSet2Perdant(set2PerdantField.getAnchor());
+ 			scores.setNombreJeuSet3Gagnant(set3GagnantField.getAnchor());
+ 			scores.setNombreJeuSet3Perdant(set3PerdantField.getAnchor());
+ 			scores.setNombreJeuSet4Gagnant(set4GagnantField.getAnchor());
+ 			scores.setNombreJeuSet4Perdant(set4PerdantField.getAnchor());
+ 		iscoresDao.saveScores(scores);
+ 		}
+ 		
+	}
+public void supprimer() {
+	IMatchDao imatchDao = new MatchDao();
+	int selectedID = tableau_score.getSelectionModel().getSelectedIndex();
+ 	Alert alert;
+ 		/*if(selectedID) {
+ 		 alert = new Alert(AlertType.ERROR);
+ 		 alert.setTitle("Error Message");
+ 		 alert.setHeaderText(null);	
+ 		 alert.setContentText("entrez la date de la rencontre a supprimer svp");
+ 		 alert.showAndWait();
+ 	 }else {*/
+ 	if(selectedID<=-1){
+		 alert = new Alert(AlertType.ERROR);
+   		 alert.setTitle("Error Message");
+   		 alert.setHeaderText(null);
+   		 alert.setContentText("AUCUNE LIGNE SELECTIONNE");
+   		 alert.showAndWait();
+ 	 }
+
+ 			 for(Scores s : iscoresDao.getAllScores()) {
+ 				 if(s.getIdScore() == selectedID) {
+ 					/* m.setDateMatch(Date.getText());
+ 					 m.setHeureDebut(HeureD.getText());
+ 					 m.setHeureFin(HeureF.getText());
+ 					 m.setDuree(Duree.getText());
+ 					 m.setParticipant(participant.getText());
+ 					 m.setArbitre(Arbitre.getText());
+ 					 m.setTerrain(Terrain.getText());*/
+ 					imatchDao.deleteMatchs(selectedID);
+ 	     			alert = new Alert(AlertType.INFORMATION);
+ 	         		 alert.setTitle("SUPRIMER AVEC SUCCES");
+ 	         		 alert.setHeaderText(null);
+ 	         		 alert.setHeaderText(" Vous avez  supprimer avec succès");
+ 	         		 alert.showAndWait();
+ 				 }
+ 			 }	 
+ 		 }
+}
